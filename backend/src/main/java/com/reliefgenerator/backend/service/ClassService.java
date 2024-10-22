@@ -29,4 +29,11 @@ public class ClassService {
         classPeriodService.generateAllClassPeriods();
         return classEntity;
     }
+
+    public ClassEntity deleteClassById(Long id) {
+        ClassEntity classEntity = classRepository.findById(id).orElse(null);
+        classPeriodService.deleteAllClassPeriodsById(id);
+        classRepository.delete(classEntity);
+        return classEntity;
+    }
 }

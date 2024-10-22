@@ -24,7 +24,7 @@ public class ClassEntity {
     private String classLetter;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "classEntity")
+    @OneToMany(mappedBy = "classEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ClassPeriod> classPeriods;
 
 }

@@ -29,4 +29,10 @@ public class TeacherController {
     public Teacher saveTeacher(@RequestBody Teacher teacher) {
         return teacherService.saveTeacher(teacher);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTeacher(@PathVariable Long id) {
+        teacherService.deleteTeacherById(id);
+    }
+
 }

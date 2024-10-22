@@ -56,4 +56,14 @@ public class TeacherPeriodService {
         teacherPeriodRepository.saveAll(teacherPeriods);
         return teacherPeriods;
     }
+
+    public void deleteAllTeacherPeriodsById(Long id) {
+        List<TeacherPeriod> teacherPeriods = teacherPeriodRepository.findAll();
+        for (TeacherPeriod teacherPeriod : teacherPeriods) {
+            if(teacherPeriod.getTeacher().getId().equals(id)) {
+                teacherPeriodRepository.delete(teacherPeriod);
+            }
+        }
+    }
+
 }

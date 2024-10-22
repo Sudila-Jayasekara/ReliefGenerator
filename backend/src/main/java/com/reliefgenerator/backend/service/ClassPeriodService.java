@@ -63,6 +63,16 @@ public class ClassPeriodService {
         return newClassPeriods;
     }
 
+    public void  deleteAllClassPeriodsById(Long id) {
+        List<ClassEntity>  classes = classService.getAllClasses();
+        for(ClassEntity classEntity : classes) {
+            if(classEntity.getId().equals(id)) {
+                classPeriodRepository.deleteById(classEntity.getId());
+            }
+        }
+    }
+
+
     public ClassPeriod setTeacher(Long classPeriodId, Teacher teacher) {
         ClassPeriod existingClassPeriod = getClassPeriodById(classPeriodId);
         if (existingClassPeriod != null) {

@@ -45,7 +45,7 @@ public class Teacher {
     private ReliefPeriod reliefPeriod;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ClassPeriod> classPeriod;
 
 }

@@ -22,4 +22,9 @@ public class ClassController {
     public ClassEntity saveClass(@RequestBody ClassEntity classEntity) {
         return classService.saveClass(classEntity);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteClassById(@PathVariable Long id) {
+        classService.deleteClassById(id);
+    }
 }

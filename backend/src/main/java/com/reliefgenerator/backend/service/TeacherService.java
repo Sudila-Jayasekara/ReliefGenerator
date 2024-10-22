@@ -44,4 +44,13 @@ public class TeacherService {
         teacherPeriodService.generateAllTeacherPeriods();
         return teacher;
     }
+
+    public Teacher deleteTeacherById(Long teacherId) {
+        Teacher teacher = teacherRepository.findById(teacherId).orElse(null);
+        if (teacher != null) {
+            teacherPeriodService.deleteAllTeacherPeriodsById(teacherId);
+            teacherRepository.delete(teacher);
+        }
+        return teacher;
+    }
 }
