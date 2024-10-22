@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 public class ClassService {
     @Autowired
     private ClassRepository classRepository;
+    @Autowired
+    private ClassPeriodService classPeriodService;
 
     public List<ClassEntity> getAllClasses() {
         return classRepository.findAll().stream()
@@ -23,6 +25,8 @@ public class ClassService {
     }
 
     public ClassEntity saveClass(ClassEntity classEntity) {
-        return classRepository.save(classEntity);
+        classRepository.save(classEntity);
+        classPeriodService.generateAllClassPeriods();
+        return classEntity;
     }
 }
