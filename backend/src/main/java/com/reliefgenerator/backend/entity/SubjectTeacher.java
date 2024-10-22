@@ -23,7 +23,4 @@ public class SubjectTeacher {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToOne
-    @JoinColumn(name = "class_entity_id")
-    private ClassEntity classEntity;
 }
