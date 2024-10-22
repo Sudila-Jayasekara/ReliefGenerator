@@ -1,13 +1,11 @@
 package com.reliefgenerator.backend.service;
 
 
-import com.reliefgenerator.backend.entity.ClassEntity;
-import com.reliefgenerator.backend.entity.ClassPeriod;
-import com.reliefgenerator.backend.entity.Period;
-import com.reliefgenerator.backend.entity.Weekday;
+import com.reliefgenerator.backend.entity.*;
 import com.reliefgenerator.backend.repository.ClassPeriodRepository;
 import com.reliefgenerator.backend.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,6 +16,7 @@ public class ClassPeriodService {
     @Autowired
     private ClassPeriodRepository classPeriodRepository;
 
+    @Lazy
     @Autowired
     private ClassService classService;
     @Autowired
@@ -56,5 +55,13 @@ public class ClassPeriodService {
         return classPeriods;
     }
 
+    public ClassPeriod setTeacherAndSubjectForPeriod(ClassPeriod classPeriod, Teacher teacher, Subject subject) {
+        classPeriod.setTeacher(teacher);
+        classPeriod.setSubject(subject);
+
+        classPeriodRepository.save(classPeriod);
+
+        return classPeriod;
+    }
 
 }
