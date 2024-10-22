@@ -27,8 +27,4 @@ public class ClassEntity {
     @OneToMany(mappedBy = "classEntity")
     private List<ClassPeriod> classPeriods;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "classEntity")
-    private List<SubjectTeacher> subjectTeachers;
-
 }
