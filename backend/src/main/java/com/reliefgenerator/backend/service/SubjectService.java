@@ -23,7 +23,11 @@ public class SubjectService {
         return subjectRepository.findAll();
     }
 
-    public Subject findByName(String name) {
+    public Subject getSubjectById(Long id) {
+        return subjectRepository.findById(id).orElse(null);
+    }
+
+    public Subject getSubjectByName(String name) {
         return subjectRepository.findByName(name);
     }
 
