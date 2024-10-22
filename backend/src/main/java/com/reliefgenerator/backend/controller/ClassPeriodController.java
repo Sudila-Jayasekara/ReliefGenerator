@@ -1,8 +1,11 @@
 package com.reliefgenerator.backend.controller;
 
 import com.reliefgenerator.backend.entity.ClassPeriod;
+import com.reliefgenerator.backend.entity.Subject;
+import com.reliefgenerator.backend.entity.Teacher;
 import com.reliefgenerator.backend.entity.Weekday;
 import com.reliefgenerator.backend.service.ClassPeriodService;
+import com.reliefgenerator.backend.service.ClassService;
 import com.reliefgenerator.backend.service.WeekdayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +23,9 @@ public class ClassPeriodController {
         return classPeriodService.getAllClassPeriods();
     }
 
-    @PostMapping("/generate")
-    public List<ClassPeriod> generateClassPeriods(){
-        return classPeriodService.generateAllClassPeriods();
-    }
-
     @PostMapping
     public ClassPeriod saveClassPeriod(@RequestBody ClassPeriod classPeriod) {
         return classPeriodService.saveClassPeriod(classPeriod);
     }
+
 }

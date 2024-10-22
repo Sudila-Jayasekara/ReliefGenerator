@@ -17,15 +17,15 @@ public class ClassPeriod {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "class_entity_id", nullable = false)
+    @JoinColumn(name = "class_entity_id")
     private ClassEntity classEntity;
 
     @ManyToOne
-    @JoinColumn(name = "weekday_id", nullable = false)
+    @JoinColumn(name = "weekday_id")
     private Weekday weekday;
 
     @ManyToOne
-    @JoinColumn(name = "period_id", nullable = false)
+    @JoinColumn(name = "period_id")
     private Period period;
 
     @ManyToOne

@@ -41,13 +41,15 @@ public class TeacherPeriodService {
         for (Teacher teacher : teachers) {
             for (Weekday weekday : weekdays) {
                 for (Period period : periods) {
-                    TeacherPeriod teacherPeriod = new TeacherPeriod();
-                    teacherPeriod.setTeacher(teacher);
-                    teacherPeriod.setWeekday(weekday);
-                    teacherPeriod.setPeriod(period);
-                    teacherPeriod.setIs_free(true);
+                    if(!teacherPeriodRepository.existsByTeacherAndPeriodAndWeekday(teacher, period, weekday)) {
+                        TeacherPeriod teacherPeriod = new TeacherPeriod();
+                        teacherPeriod.setTeacher(teacher);
+                        teacherPeriod.setWeekday(weekday);
+                        teacherPeriod.setPeriod(period);
+                        teacherPeriod.setIs_free(true);
 
-                    teacherPeriods.add(teacherPeriod);
+                        teacherPeriods.add(teacherPeriod);
+                    }
                 }
             }
         }

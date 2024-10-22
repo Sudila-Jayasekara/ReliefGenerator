@@ -23,6 +23,8 @@ public class ClassPeriodService {
     private PeriodService periodService;
     @Autowired
     private WeekdayService weekdayService;
+    @Autowired
+    private SubjectService subjectService;
 
     public List<ClassPeriod> getAllClassPeriods() {
         return classPeriodRepository.findAll();
@@ -37,31 +39,38 @@ public class ClassPeriodService {
         List<Period>  periods = periodService.getAllPeriods();
         List<Weekday> weekdays = weekdayService.getAllWeekdays();
 
-        List<ClassPeriod> classPeriods = new ArrayList<>();
+        List<ClassPeriod> newClassPeriods = new ArrayList<>();
 
         for(ClassEntity classEntity : classes) {
             for(Weekday weekday : weekdays) {
                 for (Period period : periods) {
-                    ClassPeriod classPeriod = new ClassPeriod();
-                    classPeriod.setClassEntity(classEntity);
-                    classPeriod.setPeriod(period);
-                    classPeriod.setWeekday(weekday);
+                    if (!classPeriodRepository.existsByClassEntityAndPeriodAndWeekday(classEntity, period, weekday)) {
+                        ClassPeriod classPeriod = new ClassPeriod();
+                        classPeriod.setClassEntity(classEntity);
+                        classPeriod.setPeriod(period);
+                        classPeriod.setWeekday(weekday);
 
-                    classPeriods.add(classPeriod);
+                        newClassPeriods.add(classPeriod);
+                    }
                 }
             }
         }
-        classPeriodRepository.saveAll(classPeriods);
-        return classPeriods;
+        classPeriodRepository.saveAll(newClassPeriods);
+        return newClassPeriods;
     }
 
-    public ClassPeriod setTeacherAndSubjectForPeriod(ClassPeriod classPeriod, Teacher teacher, Subject subject) {
+    public ClassPeriod setTeacherAndSubject(ClassPeriod classPeriod, Teacher teacher, Subject subject) {
+        // Check if the subject exists in the database
+        Subject existingSubject = subjectService.findByName(subject.getName());
+        if (existingSubject == null) {
+            // If the subject does not exist, save the new subject
+            existingSubject = subjectService.saveSubject(subject);
+        }
+
         classPeriod.setTeacher(teacher);
-        classPeriod.setSubject(subject);
+        classPeriod.setSubject(existingSubject);
 
-        classPeriodRepository.save(classPeriod);
-
-        return classPeriod;
+        return classPeriodRepository.save(classPeriod);
     }
 
 }

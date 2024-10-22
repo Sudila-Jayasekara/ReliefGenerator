@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectService {
@@ -20,6 +21,10 @@ public class SubjectService {
     //get mappings
     public List<Subject> getAllSubjects() {
         return subjectRepository.findAll();
+    }
+
+    public Subject findByName(String name) {
+        return subjectRepository.findByName(name);
     }
 
     public Subject saveSubject(Subject subject) {
