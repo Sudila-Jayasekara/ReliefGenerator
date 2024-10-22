@@ -1,0 +1,6 @@
+id,first_name,last_name,number,role,subject
+1,Nimal,Perera,1,TEACHER,Mathematics
+2,Kumari,Fernando,2,PRINCIPLE,Science
+3,Ajith,Rajapaksa,3,TEACHER,History
+4,Shalini,Kumarasinghe,4,TEACHER,English
+5,Dinesh,Samarasinghe,5,TEACHER,Geography

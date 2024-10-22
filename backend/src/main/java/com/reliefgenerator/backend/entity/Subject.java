@@ -12,23 +12,18 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClassEntity {
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Integer grade;
-
-    @Column(nullable = false)
-    private String classLetter;
+    private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "classEntity")
-    private List<ClassPeriod> classPeriods;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "classEntity")
+    @OneToMany(mappedBy = "subject")
     private List<SubjectTeacher> subjectTeachers;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "subject")
+    private List<ClassPeriod> classPeriods;
 }
