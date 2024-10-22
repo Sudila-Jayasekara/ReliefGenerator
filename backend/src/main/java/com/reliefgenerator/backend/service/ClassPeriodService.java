@@ -30,6 +30,10 @@ public class ClassPeriodService {
         return classPeriodRepository.findAll();
     }
 
+    public ClassPeriod getClassPeriodById(Long id) {
+        return classPeriodRepository.findById(id).orElse(null);
+    }
+
     public ClassPeriod saveClassPeriod(ClassPeriod classPeriod) {
         return classPeriodRepository.save(classPeriod);
     }
@@ -59,18 +63,29 @@ public class ClassPeriodService {
         return newClassPeriods;
     }
 
-    public ClassPeriod setTeacherAndSubject(ClassPeriod classPeriod, Teacher teacher, Subject subject) {
-        // Check if the subject exists in the database
-        Subject existingSubject = subjectService.findByName(subject.getName());
-        if (existingSubject == null) {
-            // If the subject does not exist, save the new subject
-            existingSubject = subjectService.saveSubject(subject);
+    public ClassPeriod setTeacher(Long classPeriodId, Teacher teacher) {
+        ClassPeriod existingClassPeriod = getClassPeriodById(classPeriodId);
+        if (existingClassPeriod != null) {
+            existingClassPeriod.setTeacher(teacher);
+            return saveClassPeriod(existingClassPeriod);
+        } else {
+            throw new IllegalArgumentException("ClassPeriod not found");
         }
-
-        classPeriod.setTeacher(teacher);
-        classPeriod.setSubject(existingSubject);
-
-        return classPeriodRepository.save(classPeriod);
     }
+
+    public ClassPeriod setSubject(Long classPeriodId, Subject subject) {
+        ClassPeriod existingClassPeriod = getClassPeriodById(classPeriodId);
+        if (existingClassPeriod != null) {
+            Subject existingSubject = subjectService.getSubjectByName(subject.getName());
+            if (existingSubject == null) {
+                existingSubject = subjectService.saveSubject(subject);
+            }
+            existingClassPeriod.setSubject(existingSubject);
+            return saveClassPeriod(existingClassPeriod);
+        } else {
+            throw new IllegalArgumentException("ClassPeriod not found");
+        }
+    }
+
 
 }
