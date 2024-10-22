@@ -19,6 +19,7 @@ public class SubjectController {
     public List<Subject> getAllSubjects() {
         return subjectService.getAllSubjects();
     }
+
     @PostMapping
     public Subject saveClass(@RequestBody Subject subject) {
         return subjectService.saveSubject(subject);
