@@ -3,6 +3,7 @@ package com.reliefgenerator.backend.service;
 import com.reliefgenerator.backend.entity.Teacher;
 import com.reliefgenerator.backend.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ public class TeacherService {
     private TeacherRepository teacherRepository;
     @Autowired
     private AttendanceService attendanceService;
+
+    @Autowired
+    private TeacherPeriodService teacherPeriodService;
 
     public List<Teacher> getAllTeachers() {
         return teacherRepository.findAll();
@@ -35,9 +39,9 @@ public class TeacherService {
         return absentTeachers;
     }
 
-
-
     public Teacher saveTeacher(Teacher teacher) {
-        return teacherRepository.save(teacher);
+        teacherRepository.save(teacher);
+        teacherPeriodService.generateAllTeacherPeriods();
+        return teacher;
     }
 }
