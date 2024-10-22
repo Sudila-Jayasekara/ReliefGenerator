@@ -19,9 +19,6 @@ public class Subject {
 
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "subject")
-    private List<SubjectTeacher> subjectTeachers;
 
     @JsonIgnore
     @OneToMany(mappedBy = "subject")

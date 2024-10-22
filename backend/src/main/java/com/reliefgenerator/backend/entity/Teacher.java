@@ -31,9 +31,6 @@ public class Teacher {
     @Column(nullable = false)
     private String role;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "teacher")
-    private List<SubjectTeacher> subjectTeachers;
 
     @JsonIgnore
     @OneToMany(mappedBy = "teacher")
