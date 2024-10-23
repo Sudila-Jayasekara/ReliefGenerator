@@ -21,14 +21,6 @@ public class TeacherPeriod {
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
 
-    @ManyToOne
-    @JoinColumn(name = "weekday_id", nullable = false)
-    private Weekday weekday;
-
-    @ManyToOne
-    @JoinColumn(name = "period_id", nullable = false)
-    private Period period;
-
     @OneToOne
     @JoinColumn(name = "class_period_id")
     private ClassPeriod classPeriod;

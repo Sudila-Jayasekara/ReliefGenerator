@@ -23,7 +23,4 @@ public class Weekday {
     @OneToMany(mappedBy = "weekday")
     private List<ClassPeriod> classPeriods;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "weekday")
-    private List<TeacherPeriod> teacherPeriods;
 }

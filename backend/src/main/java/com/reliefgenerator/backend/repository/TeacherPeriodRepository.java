@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TeacherPeriodRepository extends JpaRepository<TeacherPeriod, Long> {
-    boolean existsByTeacherAndPeriodAndWeekday(Teacher teacher, Period period, Weekday weekday);
 }

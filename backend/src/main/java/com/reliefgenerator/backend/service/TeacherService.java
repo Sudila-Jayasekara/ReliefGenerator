@@ -41,7 +41,6 @@ public class TeacherService {
 
     public Teacher saveTeacher(Teacher teacher) {
         teacherRepository.save(teacher);
-        teacherPeriodService.generateAllTeacherPeriods();
         return teacher;
     }
 
